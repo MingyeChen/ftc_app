@@ -123,7 +123,7 @@ public class motortestingwmingye extends LinearOpMode {
             rightFrontMotor.setPower(Range.clip(FrontRight,-1,1));
             rightBackMotor.setPower(Range.clip(RearRight,-1, 1));
 
-
+            
             // Declare claw variables
             double leftClawPosition=0;
             double rightClawPosition=0;
