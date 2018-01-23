@@ -49,4 +49,10 @@ public class base {
         rightFront.setPower(rightWheel);
         rightBack.setPower(rightWheel);
     }
+
+    public String toString()
+    {
+        return "Base: leftF: "+leftFront.getPower()+" leftB: "+leftBack.getPower()+" rightF: "+rightFront.getPower()+" rightBack: "+rightBack.getPower();
+    }
+
 }

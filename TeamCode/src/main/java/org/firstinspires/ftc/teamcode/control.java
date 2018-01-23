@@ -78,6 +78,11 @@ public class control extends LinearOpMode {
                 arm1.release();
             }
 
+            telemetry.addLine(base1.toString());
+            telemetry.addLine(claw1.toString());
+            telemetry.addLine(arm1.toString());
+            telemetry.update();
+
         }
     }
 }

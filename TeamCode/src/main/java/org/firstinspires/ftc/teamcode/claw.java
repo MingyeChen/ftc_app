@@ -59,4 +59,9 @@ public class claw {
         }
         lifter.setPower(Range.clip(liftSpeed, -0.5, 0.5));
     }
+
+    public String toString()
+    {
+        return "Claw: left1: "+left1.getPosition()+", left2: "+left2.getPosition()+", right1: "+right1.getPosition()+", right2: "+right2.getPosition()+", lifter: "+lifter.getPower();
+    }
 }

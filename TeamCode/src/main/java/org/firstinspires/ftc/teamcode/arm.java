@@ -60,4 +60,9 @@ public class arm {
         rotate.setPosition(0.5);
         grab.setPosition(0.5);
     }
+
+    public String toString()
+    {
+        return "Arm: extend1: "+extend1.getPower()+", extend2: "+extend2.getPower()+", rotate: "+rotate.getPosition()+", grab: "+grab.getPosition();
+    }
 }
