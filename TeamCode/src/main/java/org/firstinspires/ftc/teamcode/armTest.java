@@ -7,10 +7,6 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-/**
- * Created by mingy on 1/20/2018.
- */
-
 @TeleOp(name="armTest", group = "Linear Opmode")
 public class armTest extends LinearOpMode {
 

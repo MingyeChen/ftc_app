@@ -6,10 +6,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-/**
- * Created by mingy on 1/20/2018.
- */
-
 @TeleOp(name="baseTest", group = "Linear Opmode")
 public class baseTest extends LinearOpMode {
 

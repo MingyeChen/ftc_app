@@ -3,10 +3,6 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
-/**
- * Created by mingy on 1/18/2018.
- */
-
 public class base {
 
     private DcMotor leftFront, rightFront, leftBack, rightBack;

@@ -5,10 +5,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-/**
- * Created by mingy on 1/20/2018.
- */
-
 public class claw {
     private Servo left1, right1, left2, right2;
     private DcMotor lifter;
