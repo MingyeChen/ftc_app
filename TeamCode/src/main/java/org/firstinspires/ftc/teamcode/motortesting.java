@@ -54,7 +54,7 @@ import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name="motortesttts", group="Linear Opmode")
 //@Disabled
-public class motortestingwmingye extends LinearOpMode {
+public class motortesting extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
