@@ -82,6 +82,3 @@ public class control extends LinearOpMode {
         }
     }
 }
-
-//comment
-//another comment
