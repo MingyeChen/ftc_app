@@ -11,9 +11,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class clawTest extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor clawLifter = null;
-    private Servo rightClawServo, leftClawServo, rightClawTopServo, leftClawTopServo = null;
-
+    private DcMotor clawLifter;
+    private Servo rightClawServo, leftClawServo, rightClawTopServo, leftClawTopServo;
     private claw claw1 = new claw(leftClawServo, rightClawServo, leftClawTopServo, rightClawTopServo, clawLifter);
 
     @Override

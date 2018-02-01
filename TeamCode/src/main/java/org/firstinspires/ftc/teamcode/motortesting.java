@@ -44,18 +44,19 @@ public class motortesting extends LinearOpMode {
         relicRotate = hardwareMap.servo.get("relic_rotate");
         relicGrabber = hardwareMap.servo.get("relic_grabber");
 
-
 //        relic = hardwareMap.servo.get("color_arm");
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
-        boolean clawPosition = false;
+        boolean clawPosition = true;
+        boolean clawPosition2 = true;
 
         boolean relicGrabbing = false;
         double relicGrab = 0.5;
+        double relicLift = 0.8;
 
-        double colorArmServo = 0;
+
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
@@ -66,8 +67,8 @@ public class motortesting extends LinearOpMode {
 
             double FrontLeft, FrontRight, RearLeft, RearRight;
 
-            double Ch1 = gamepad1.right_stick_x;
-            double Ch3 = gamepad1.left_stick_y;
+            double Ch1 = -gamepad1.right_stick_x;
+            double Ch3 = gamepad1.right_stick_y;
             double Ch4 = gamepad1.left_stick_x;
 
             FrontLeft =  Ch3 + Ch1 + Ch4;
@@ -84,27 +85,50 @@ public class motortesting extends LinearOpMode {
             // Declare claw variables
             double leftClawPosition=0;
             double rightClawPosition=0;
+            double leftClawPosition2=0;
+            double rightClawPosition2=0;
 
-            boolean clawPositionSwitch = !clawPosition;
+//            boolean clawPositionSwitch = !clawPosition;
+//            boolean clawPositionSwitch2 = !clawPosition2;
 
             // Setup claw variables
-            if(gamepad1.b)
-            {
-                clawPosition = clawPositionSwitch;
-            }
-//            if (gamepad1.x)
+//            if(gamepad1.b)
 //            {
-//                clawPosition=false;
+//                clawPosition = clawPositionSwitch;
 //            }
+//
+//            if(gamepad1.x)
+//            {
+//                clawPosition2 = clawPositionSwitch2;
+//            }
+            if (gamepad1.x)
+            {
+                clawPosition=true;
+            }
+            if (gamepad1.b)
+            {
+                clawPosition=false;
+            }
+            if (gamepad1.y)
+            {
+                clawPosition2=true;
+            }
+            if (gamepad1.a)
+            {
+                clawPosition2=false;
+            }
 
-            if (!clawPosition) {leftClawPosition=0;} else if (clawPosition) {leftClawPosition=1;}
-            if (!clawPosition) {rightClawPosition=1;} else if (clawPosition) {rightClawPosition=0;}
+            if (!clawPosition) {leftClawPosition=0.2;} else if (clawPosition) {leftClawPosition=0.7;}
+            if (!clawPosition) {rightClawPosition=0.8;} else if (clawPosition) {rightClawPosition=0.3;}
+
+            if (!clawPosition2) {leftClawPosition2=0.2;} else if (clawPosition2) {leftClawPosition2=0.7;}
+            if (!clawPosition2) {rightClawPosition2=0.8;} else if (clawPosition2) {rightClawPosition2=0.3;}
 
             // Send positions to claw
             leftClawServo.setPosition(leftClawPosition);
             rightClawServo.setPosition(rightClawPosition);
-            leftClawTopServo.setPosition(leftClawPosition);
-            rightClawTopServo.setPosition(rightClawPosition);
+            leftClawTopServo.setPosition(leftClawPosition2);
+            rightClawTopServo.setPosition(rightClawPosition2);
 
             if(gamepad1.dpad_up)
             {
@@ -144,33 +168,41 @@ public class motortesting extends LinearOpMode {
             relicExtender2.setPower(rightExtendPower);
 
 
-            if(gamepad1.y)
-            {
-                colorArmServo = 1;
-            }
-            if(gamepad1.a)
-            {
-                colorArmServo = 0;
-            }
+            double colorArmPosition = 0;
 
-            colorArm.setPosition(colorArmServo);
+
+//            if (!colorArmServo) {colorArmPosition=0;} else if (colorArmServo) {colorArmPosition=1;}
+
+            colorArm.setPosition(colorArmPosition);
 
 
 
-            if(gamepad1.dpad_left)
+
+            if(gamepad1.left_stick_button)
             {
                 relicGrabbing = true;
             }
 
-            if(gamepad1.dpad_right)
+            if(gamepad1.right_stick_button)
             {
                 relicGrabbing = false;
             }
 
-            if (!relicGrabbing) {relicGrab=0.5;} else if (relicGrabbing) {relicGrab=0;}
+            if (!relicGrabbing) {relicGrab=1;} else if (relicGrabbing) {relicGrab=0;}
+
+            if(gamepad1.dpad_left)
+            {
+                relicLift += 0.002;
+            }
+            if(gamepad1.dpad_right)
+            {
+                relicLift -= 0.002;
+            }
+
+
 
             relicGrabber.setPosition(relicGrab);
-            relicRotate.setPosition(relicGrab);
+            relicRotate.setPosition(Range.clip(relicLift,0,1));
 
 
 
@@ -183,7 +215,7 @@ public class motortesting extends LinearOpMode {
             telemetry.addLine("Grabber: "+clawPosition);
             telemetry.addLine("Lifter: "+clawLifter.getPower());
             telemetry.addLine("relicExtender, left: " +leftExtendPower+" right: "+rightExtendPower);
-            telemetry.addLine("colorArm: "+colorArmServo);
+            telemetry.addLine("colorArm: "+colorArmPosition);
             telemetry.update();
         }
     }

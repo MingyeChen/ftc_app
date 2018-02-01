@@ -28,10 +28,10 @@ public class claw {
 
     public void close()
     {
-        left1.setPosition(1);
-        left2.setPosition(1);
-        right1.setPosition(1);
-        right2.setPosition(1);
+        this.left1.setPosition(1);
+        this.left2.setPosition(1);
+        this.right1.setPosition(1);
+        this.right2.setPosition(1);
     }
 
     public void open()
