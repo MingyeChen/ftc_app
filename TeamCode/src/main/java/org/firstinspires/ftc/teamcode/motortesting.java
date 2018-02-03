@@ -105,13 +105,13 @@ public class motortesting extends LinearOpMode {
             {
                 clawPosition=true;
             }
-            if (gamepad1.b)
-            {
-                clawPosition=false;
-            }
             if (gamepad1.y)
             {
                 clawPosition2=true;
+            }
+            if (gamepad1.b)
+            {
+                clawPosition=false;
             }
             if (gamepad1.a)
             {

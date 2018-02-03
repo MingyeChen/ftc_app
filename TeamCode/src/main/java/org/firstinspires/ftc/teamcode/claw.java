@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
@@ -26,20 +27,28 @@ public class claw {
         this.lifter = lifter;
     }
 
-    public void close()
+    public void close1()
     {
-        this.left1.setPosition(1);
-        this.left2.setPosition(1);
-        this.right1.setPosition(1);
-        this.right2.setPosition(1);
+        left1.setPosition(0.7);
+        right1.setPosition(0.3);
     }
 
-    public void open()
+    public void open1()
     {
-        left1.setPosition(0.5);
-        left2.setPosition(0.5);
-        right1.setPosition(0.5);
-        right2.setPosition(0.5);
+        left1.setPosition(0.3);
+        right1.setPosition(0.7);
+    }
+
+    public void close2()
+    {
+        left2.setPosition(0.7);
+        right2.setPosition(0.3);
+    }
+
+    public void open2()
+    {
+        left2.setPosition(0.3);
+        right2.setPosition(0.7);
     }
 
     public void lift(boolean up, boolean down)

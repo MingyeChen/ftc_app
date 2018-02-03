@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class arm {
@@ -47,14 +48,26 @@ public class arm {
 
     public void grab()
     {
-        rotate.setPosition(1);
         grab.setPosition(1);
     }
 
     public void release()
     {
-        rotate.setPosition(0.5);
-        grab.setPosition(0.5);
+        grab.setPosition(0);
+    }
+
+    public void rotate(Gamepad gamepad1)
+    {
+        double relicLift = 0.8;
+        if(gamepad1.dpad_left)
+        {
+            relicLift += 0.002;
+        }
+        if(gamepad1.dpad_right)
+        {
+            relicLift -= 0.002;
+        }
+        rotate.setPosition(relicLift);
     }
 
     public String toString()

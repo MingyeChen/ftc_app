@@ -14,9 +14,6 @@ public class control extends LinearOpMode {
     private DcMotor leftFrontMotor, leftBackMotor, rightFrontMotor, rightBackMotor, clawLifter, relicExtender, relicExtender2  = null;
     private Servo rightClawServo, leftClawServo, rightClawTopServo, leftClawTopServo, colorArm, relicRotate, relicGrabber = null;
 
-    private base base1 = new base(leftFrontMotor, rightFrontMotor, leftBackMotor, rightBackMotor);
-    private claw claw1 = new claw(leftClawServo, rightClawServo, leftClawTopServo, rightClawTopServo, clawLifter);
-    private arm arm1 = new arm(relicExtender, relicExtender2, relicRotate, relicGrabber);
 
     @Override
     public void runOpMode()
@@ -49,19 +46,30 @@ public class control extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
+        base base1 = new base(leftFrontMotor, rightFrontMotor, leftBackMotor, rightBackMotor);
+        claw claw1 = new claw(leftClawServo, rightClawServo, leftClawTopServo, rightClawTopServo, clawLifter);
+        arm arm1 = new arm(relicExtender, relicExtender2, relicRotate, relicGrabber);
+
         while(opModeIsActive())
         {
             base1.mecaDrive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
-            if(gamepad1.b)
-            {
-                claw1.close();
-            }
 
+            if (gamepad1.b)
+            {
+                claw1.close1();
+            }
             if (gamepad1.x)
             {
-                claw1.open();
+                claw1.open1();
             }
-
+            if (gamepad1.a)
+            {
+                claw1.close2();
+            }
+            if (gamepad1.y)
+            {
+                claw1.open2();
+            }
             claw1.lift(gamepad1.dpad_up, gamepad1.dpad_down);
 
             arm1.extend(gamepad1.left_bumper, gamepad1.right_bumper, gamepad1.left_trigger, gamepad1.right_trigger);
@@ -73,6 +81,7 @@ public class control extends LinearOpMode {
             {
                 arm1.release();
             }
+            arm1.rotate(gamepad1);
 
             telemetry.addLine(base1.toString());
             telemetry.addLine(claw1.toString());

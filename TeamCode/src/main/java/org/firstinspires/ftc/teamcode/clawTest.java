@@ -37,16 +37,22 @@ public class clawTest extends LinearOpMode {
 
         while(opModeIsActive())
         {
-            if(gamepad1.b)
+            if (gamepad1.b)
             {
-                claw1.close();
+                claw1.close1();
             }
-
             if (gamepad1.x)
             {
-                claw1.open();
+                claw1.open1();
             }
-
+            if (gamepad1.a)
+            {
+                claw1.close2();
+            }
+            if (gamepad1.y)
+            {
+                claw1.open2();
+            }
             claw1.lift(gamepad1.dpad_up, gamepad1.dpad_down);
 
             telemetry.addLine(claw1.toString());
