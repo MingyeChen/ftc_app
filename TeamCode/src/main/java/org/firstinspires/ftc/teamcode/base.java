@@ -7,6 +7,17 @@ public class base {
 
     private DcMotor leftFront, rightFront, leftBack, rightBack;
 
+    static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
+    static final double     DRIVE_GEAR_REDUCTION    = 2.0 ;     // This is < 1.0 if geared UP
+    static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
+    static final double     WHEEL_DIAMETER_CM   = 2.0;
+    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
+            (WHEEL_DIAMETER_INCHES * 3.1415);
+    static final double     COUNTS_PER_CM         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
+            (WHEEL_DIAMETER_CM * 3.1415);
+    static final double     DRIVE_SPEED             = 0.6;
+    static final double     TURN_SPEED              = 0.5;
+
     public base(DcMotor leftFront, DcMotor rightFront, DcMotor leftBack, DcMotor rightBack)
     {
         this.leftFront = leftFront;
@@ -44,6 +55,47 @@ public class base {
         leftBack.setPower(leftWheel);
         rightFront.setPower(rightWheel);
         rightBack.setPower(rightWheel);
+    }
+
+    public void resetMotors()
+    {
+        leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
+    public void newTartget(double leftCM, double rightCM)
+    {
+        resetMotors();
+        int leftTarget = (int)(leftCM * COUNTS_PER_CM);
+        int rightTarget = (int)(rightCM * COUNTS_PER_CM);
+        leftBack.setTargetPosition(leftTarget);
+        leftFront.setTargetPosition(leftTarget);
+        rightBack.setTargetPosition(rightTarget);
+        rightFront.setTargetPosition(rightTarget);
+
+        leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        leftBack.setPower(DRIVE_SPEED);
+        leftFront.setPower(DRIVE_SPEED);
+        rightBack.setPower(DRIVE_SPEED);
+        rightFront.setPower(DRIVE_SPEED);
+
+        resetMotors();
+    }
+
+    public void turn()
+    {
+        newTartget(10,-10);
     }
 
     public String toString()

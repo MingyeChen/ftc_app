@@ -16,7 +16,15 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  */
 
 public class colorSensor {
-    public char sense(NormalizedColorSensor colorSensor) {
+
+    NormalizedColorSensor colorSensor;
+
+    public colorSensor(NormalizedColorSensor colorSensor)
+    {
+        this.colorSensor = colorSensor;
+    }
+
+    public char sense() {
 
         // values is a reference to the hsvValues array.
         float[] hsvValues = new float[3];
