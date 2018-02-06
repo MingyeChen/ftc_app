@@ -30,25 +30,25 @@ public class claw {
     public void close1()
     {
         left1.setPosition(0.7);
-        right1.setPosition(0.3);
+        right1.setPosition(0.7);
     }
 
     public void open1()
     {
         left1.setPosition(0.3);
-        right1.setPosition(0.7);
+        right1.setPosition(0.3);
     }
 
     public void close2()
     {
         left2.setPosition(0.7);
-        right2.setPosition(0.3);
+        right2.setPosition(0.7);
     }
 
     public void open2()
     {
         left2.setPosition(0.3);
-        right2.setPosition(0.7);
+        right2.setPosition(0.3);
     }
 
     public void lift(boolean up, boolean down)

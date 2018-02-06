@@ -1,8 +1,13 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.app.Activity;
+import android.graphics.Color;
+import android.view.View;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
@@ -13,14 +18,13 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class auto extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor leftFrontMotor, leftBackMotor, rightFrontMotor, rightBackMotor, clawLifter, relicExtender, relicExtender2  = null;
+    private DcMotor leftFrontMotor, leftBackMotor, rightFrontMotor, rightBackMotor, clawLifter, relicExtender, relicExtender2 = null;
     private Servo rightClawServo, leftClawServo, rightClawTopServo, leftClawTopServo, colorArm, relicRotate, relicGrabber = null;
-    private NormalizedColorSensor colorSensor;
+    private ColorSensor eye;
 
 
     @Override
-    public void runOpMode()
-    {
+    public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
@@ -40,6 +44,8 @@ public class auto extends LinearOpMode {
         relicRotate = hardwareMap.servo.get("relic_rotate");
         relicGrabber = hardwareMap.servo.get("relic_grabber");
 
+        eye = hardwareMap.colorSensor.get("eye");
+
         rightFrontMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         rightBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         clawLifter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -55,45 +61,55 @@ public class auto extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-        base base1 = new base(leftFrontMotor, rightFrontMotor, leftBackMotor, rightBackMotor);
+        mouth mouth1 = new mouth(telemetry);
+        base base1 = new base(leftFrontMotor, rightFrontMotor, leftBackMotor, rightBackMotor, mouth1);
         claw claw1 = new claw(leftClawServo, rightClawServo, leftClawTopServo, rightClawTopServo, clawLifter);
         arm arm1 = new arm(relicExtender, relicExtender2, relicRotate, relicGrabber);
-        colorSensor colorSensor1 = new colorSensor(colorSensor);
+        int relativeLayoutId = hardwareMap.appContext.getResources().getIdentifier("RelativeLayout", "id", hardwareMap.appContext.getPackageName());
+        final View relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
+        eye eye1 = new eye(eye);
+//        colorSensor colorSensor1 = new colorSensor(colorSensor);
 
 
         claw1.close1();
         claw1.close2();
+        mouth1.speak("Claws closed");
+        claw1.lift(true, false);
+        mouth1.speak("Lifting...");
+        sleep(1000);
+        claw1.lift(false, false);
+        mouth1.speak("Lifted");
         colorArm.setPosition(1);
-        char color = colorSensor1.sense();
-        if(color=='R')
-        {
+        sleep(3000);
+        char color = eye1.sense();
+        mouth1.speak("Color recongnized:"+color);
 
-            base1.newTartget(5,5);
+        if (color == 'R') {
+            base1.newTartget(1, 1);
             colorArm.setPosition(0);
-            base1.newTartget(-5,-5);
-        }
-        else
-        {
-            base1.newTartget(-5,-5);
+            base1.newTartget(-1, -1);
+        } else {
+            base1.newTartget(-1, -1);
             colorArm.setPosition(0);
-            base1.newTartget(5,5);
+            base1.newTartget(1, 1);
         }
 
-        base1.newTartget(50,50);
-        base1.turn();
-
-        base1.newTartget(10,10);
+        base1.newTartget(36,36);
+        base1.newTartget(1,-1);
+        base1.newTartget(1,1);
         claw1.open1();
         claw1.open2();
+        mouth1.speak("Claws opened");
 
-        while(opModeIsActive())
-        {
-            telemetry.addLine("Color recongnized:"+color);
-            telemetry.addLine(base1.toString());
-            telemetry.addLine(claw1.toString());
-            telemetry.addLine(arm1.toString());
-            telemetry.update();
+//        base1.newTartget(50,50);
+//        base1.turn();
+//
+//        base1.newTartget(10,10);
+//        claw1.open1();
+//        claw1.open2();
 
-        }
     }
+
+
+
 }

@@ -69,7 +69,7 @@ public class motortesting extends LinearOpMode {
 
             double Ch1 = -gamepad1.right_stick_x;
             double Ch3 = gamepad1.right_stick_y;
-            double Ch4 = gamepad1.left_stick_x;
+            double Ch4 = -gamepad1.left_stick_x;
 
             FrontLeft =  Ch3 + Ch1 + Ch4;
             RearLeft =   Ch3 + Ch1 - Ch4;
@@ -178,12 +178,12 @@ public class motortesting extends LinearOpMode {
 
 
 
-            if(gamepad1.left_stick_button)
+            if(gamepad1.start)
             {
                 relicGrabbing = true;
             }
 
-            if(gamepad1.right_stick_button)
+            if(gamepad1.back)
             {
                 relicGrabbing = false;
             }

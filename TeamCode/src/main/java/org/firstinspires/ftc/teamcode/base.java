@@ -6,11 +6,12 @@ import com.qualcomm.robotcore.util.Range;
 public class base {
 
     private DcMotor leftFront, rightFront, leftBack, rightBack;
+    private mouth baseMouth;
 
     static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
     static final double     DRIVE_GEAR_REDUCTION    = 2.0 ;     // This is < 1.0 if geared UP
     static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
-    static final double     WHEEL_DIAMETER_CM   = 2.0;
+    static final double     WHEEL_DIAMETER_CM   = 10.0;
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     COUNTS_PER_CM         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
@@ -18,12 +19,13 @@ public class base {
     static final double     DRIVE_SPEED             = 0.6;
     static final double     TURN_SPEED              = 0.5;
 
-    public base(DcMotor leftFront, DcMotor rightFront, DcMotor leftBack, DcMotor rightBack)
+    public base(DcMotor leftFront, DcMotor rightFront, DcMotor leftBack, DcMotor rightBack, mouth baseMouth)
     {
         this.leftFront = leftFront;
         this.leftBack = leftBack;
         this.rightFront = rightFront;
         this.rightBack = rightBack;
+        this.baseMouth = baseMouth;
 //        this.drive = drive;
 //        this.strafe = strafe;
 //        this.turn = turn;
@@ -70,11 +72,11 @@ public class base {
         rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
-    public void newTartget(double leftCM, double rightCM)
+    public void newTartget(double leftInches, double rightInches)
     {
         resetMotors();
-        int leftTarget = (int)(leftCM * COUNTS_PER_CM);
-        int rightTarget = (int)(rightCM * COUNTS_PER_CM);
+        int leftTarget = (int)(leftInches * COUNTS_PER_INCH);
+        int rightTarget = (int)(rightInches * COUNTS_PER_INCH);
         leftBack.setTargetPosition(leftTarget);
         leftFront.setTargetPosition(leftTarget);
         rightBack.setTargetPosition(rightTarget);
@@ -89,6 +91,11 @@ public class base {
         leftFront.setPower(DRIVE_SPEED);
         rightBack.setPower(DRIVE_SPEED);
         rightFront.setPower(DRIVE_SPEED);
+
+        while (leftFront.isBusy() && leftBack.isBusy() && rightFront.isBusy() && rightBack.isBusy())
+        {
+            baseMouth.speak("Running, Left: "+leftFront.getCurrentPosition()+" Right: "+rightFront.getCurrentPosition());
+        }
 
         resetMotors();
     }
