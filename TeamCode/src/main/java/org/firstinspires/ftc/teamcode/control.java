@@ -46,7 +46,8 @@ public class control extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-        base base1 = new base(leftFrontMotor, rightFrontMotor, leftBackMotor, rightBackMotor);
+        mouth mouth1 = new mouth(telemetry);
+        base base1 = new base(leftFrontMotor, rightFrontMotor, leftBackMotor, rightBackMotor, mouth1);
         claw claw1 = new claw(leftClawServo, rightClawServo, leftClawTopServo, rightClawTopServo, clawLifter);
         arm arm1 = new arm(relicExtender, relicExtender2, relicRotate, relicGrabber);
 

@@ -46,8 +46,8 @@ public class auto extends LinearOpMode {
 
         eye = hardwareMap.colorSensor.get("eye");
 
-        rightFrontMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftFrontMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         clawLifter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightClawServo.setDirection(Servo.Direction.REVERSE);
         rightClawTopServo.setDirection(Servo.Direction.REVERSE);
@@ -85,21 +85,27 @@ public class auto extends LinearOpMode {
         mouth1.speak("Color recongnized:"+color);
 
         if (color == 'R') {
-            base1.newTartget(1, 1);
+            base1.newTartget(2, 2);
             colorArm.setPosition(0);
-            base1.newTartget(-1, -1);
+            base1.newTartget(-2, -2);
         } else {
-            base1.newTartget(-1, -1);
+            base1.newTartget(-2, -2);
             colorArm.setPosition(0);
-            base1.newTartget(1, 1);
+            base1.newTartget(2, 2);
         }
 
-        base1.newTartget(36,36);
-        base1.newTartget(1,-1);
-        base1.newTartget(1,1);
+        base1.newTartget(12,12);
+        base1.newTartget(3,-3);
+        base1.newTartget(2,2);
         claw1.open1();
         claw1.open2();
         mouth1.speak("Claws opened");
+        base1.newTartget(-2,-2);
+        claw1.close1();
+        claw1.close2();
+        mouth1.speak("Claws closed");
+        base1.newTartget(2,2);
+
 
 //        base1.newTartget(50,50);
 //        base1.turn();

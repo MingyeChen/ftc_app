@@ -148,20 +148,20 @@ public class motortesting extends LinearOpMode {
 
             if(gamepad1.left_bumper)
             {
-                leftExtendPower = 0.5;
+                leftExtendPower = 1;
             }
             else if (gamepad1.right_bumper)
             {
-                rightExtendPower = 0.5;
+                rightExtendPower = 1;
             }
 
             if(gamepad1.left_trigger>0)
             {
-                leftExtendPower = -0.5;
+                leftExtendPower = -1;
             }
             else if(gamepad1.right_trigger>0)
             {
-                rightExtendPower = -0.5;
+                rightExtendPower = -1;
             }
 
             relicExtender.setPower(leftExtendPower);
@@ -178,12 +178,12 @@ public class motortesting extends LinearOpMode {
 
 
 
-            if(gamepad1.start)
+            if(gamepad1.right_stick_button)
             {
                 relicGrabbing = true;
             }
 
-            if(gamepad1.back)
+            if(gamepad1.left_stick_button)
             {
                 relicGrabbing = false;
             }

@@ -12,7 +12,8 @@ public class baseTest extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor leftFrontMotor, leftBackMotor, rightFrontMotor, rightBackMotor = null;
 
-    private base base1 = new base(leftFrontMotor, rightFrontMotor, leftBackMotor, rightBackMotor);
+    private mouth mouth1 = new mouth(telemetry);
+    private base base1 = new base(leftFrontMotor, rightFrontMotor, leftBackMotor, rightBackMotor, mouth1);
 
 
     @Override
