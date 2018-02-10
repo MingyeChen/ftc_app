@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="motortesttts", group="Linear Opmode")
+@TeleOp(name="FIRST PLACE", group="Linear Opmode")
 //@Disabled
 public class motortesting extends LinearOpMode {
 
@@ -54,7 +54,7 @@ public class motortesting extends LinearOpMode {
 
         boolean relicGrabbing = false;
         double relicGrab = 0.5;
-        double relicLift = 0.8;
+        double relicLift = 0.5;
 
 
 
@@ -76,10 +76,10 @@ public class motortesting extends LinearOpMode {
             FrontRight = Ch3 - Ch1 - Ch4;
             RearRight =  Ch3 - Ch1 + Ch4;
 
-            leftFrontMotor.setPower(Range.clip(FrontLeft, -1,1));
-            leftBackMotor.setPower(Range.clip(RearLeft,-1, 1));
-            rightFrontMotor.setPower(Range.clip(FrontRight,-1,1));
-            rightBackMotor.setPower(Range.clip(RearRight,-1, 1));
+            leftFrontMotor.setPower(Range.clip(FrontLeft, -0.8,0.8));
+            leftBackMotor.setPower(Range.clip(RearLeft,-0.8, 0.8));
+            rightFrontMotor.setPower(Range.clip(FrontRight,-0.8,0.8));
+            rightBackMotor.setPower(Range.clip(RearRight,-0.8, 0.8));
 
             
             // Declare claw variables
@@ -148,25 +148,23 @@ public class motortesting extends LinearOpMode {
 
             if(gamepad1.left_bumper)
             {
-                leftExtendPower = 1;
+                leftExtendPower = -0.5;
             }
             else if (gamepad1.right_bumper)
             {
-                rightExtendPower = 1;
+                rightExtendPower = -0.5;
             }
-
             if(gamepad1.left_trigger>0)
             {
-                leftExtendPower = -1;
+                leftExtendPower += gamepad1.left_trigger;
             }
             else if(gamepad1.right_trigger>0)
             {
-                rightExtendPower = -1;
+                rightExtendPower += gamepad1.right_trigger;
             }
 
             relicExtender.setPower(leftExtendPower);
             relicExtender2.setPower(rightExtendPower);
-
 
             double colorArmPosition = 0;
 
@@ -192,11 +190,11 @@ public class motortesting extends LinearOpMode {
 
             if(gamepad1.dpad_left)
             {
-                relicLift += 0.002;
+                relicLift -= 0.002;
             }
             if(gamepad1.dpad_right)
             {
-                relicLift -= 0.002;
+                relicLift += 0.002;
             }
 
 
@@ -210,6 +208,7 @@ public class motortesting extends LinearOpMode {
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
+            telemetry.addLine("relicLift: "+relicLift);
             telemetry.addLine("lf: "+leftFrontMotor.getPower()+"rf: "+rightFrontMotor.getPower());
             telemetry.addLine("lb: "+leftBackMotor.getPower()+"rb: "+rightBackMotor.getPower());
             telemetry.addLine("Grabber: "+clawPosition);

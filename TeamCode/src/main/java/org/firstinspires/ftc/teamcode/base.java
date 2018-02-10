@@ -31,6 +31,7 @@ public class base {
 //        this.turn = turn;
     }
 
+
     public void mecaDrive(double drive, double strafe, double turn)
     {
         double lf, lb, rf, rb;
@@ -71,6 +72,11 @@ public class base {
         rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
+
+//    public void newTartget(double leftInches, double rightInches)
+//    {
+//        newTartget(leftInches, rightInches, DRIVE_SPEED);
+//    }
 
     public void newTartget(double leftInches, double rightInches)
     {
