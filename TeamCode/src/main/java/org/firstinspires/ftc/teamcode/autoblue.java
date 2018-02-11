@@ -76,8 +76,7 @@ public class autoblue extends LinearOpMode {
         claw1.lift(false, true);
         sleep(2000);
         claw1.lift(false,false);
-
-        sleep(2000);
+        
 
         claw1.close1();
         claw1.close2();

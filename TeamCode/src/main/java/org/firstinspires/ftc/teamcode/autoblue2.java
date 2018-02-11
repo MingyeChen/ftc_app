@@ -76,7 +76,6 @@ public class autoblue2 extends LinearOpMode {
         sleep(2000);
         claw1.lift(false,false);
         //grab glyph and lift
-        sleep(2000);
         claw1.close1();
         claw1.close2();
         mouth1.speak("Claws closed");
@@ -117,18 +116,18 @@ public class autoblue2 extends LinearOpMode {
         base1.newTartget(5,5);
         claw1.open1();
         claw1.open2();
-//        base1.newTartget(-5,-5);
+        base1.newTartget(-5,-5);
 //        claw1.lift(false, true);
 //        mouth1.speak("Lifting...");
-//        sleep(1000);
+//        sleep(500);
 //        claw1.lift(false, false);
 //        mouth1.speak("Lifted");
 //        claw1.close1();
 //        claw1.close2();
-//        base1.newTartget(10,10);
+        base1.newTartget(10,10);
 //        base1.newTartget(15,-15);
 //        base1.newTartget(5,5);
-        base1.newTartget(-5,-5);
+        base1.newTartget(-10,-10);
 
     }
 
