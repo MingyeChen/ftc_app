@@ -1,3 +1,6 @@
+## Welcome to team CEE0006's repository!
+This repository contains our team code for 2018 season. As the season ended, this repository is now archived and will no longer be updated. Please feel free to copy any of our code!
+
 ## Welcome!
 This GitHub repository contains the source code that is used to build an Android app to control a *FIRST* Tech Challenge competition robot.  To use this SDK, download/clone the entire project to your local computer.
 
