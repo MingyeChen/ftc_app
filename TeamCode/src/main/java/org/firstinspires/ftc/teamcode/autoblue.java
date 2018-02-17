@@ -92,13 +92,13 @@ public class autoblue extends LinearOpMode {
         mouth1.speak("Color recongnized:"+color);
 
         if (color == 'B') {
-            base1.newTartget(2, 2);
+            base1.newTartget(1.5, 1.5);
             colorArm.setPosition(0);
-            base1.newTartget(-2, -2);
+            base1.newTartget(-1.5, -1.5);
         } else {
-            base1.newTartget(-2, -2);
+            base1.newTartget(-1.5, -1.5);
             colorArm.setPosition(0);
-            base1.newTartget(2, 2);
+            base1.newTartget(1.5, 1.5);
         }
 
         base1.newTartget(-28.5,-28.5);

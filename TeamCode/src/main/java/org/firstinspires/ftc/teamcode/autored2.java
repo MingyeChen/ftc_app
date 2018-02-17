@@ -98,13 +98,13 @@ public class autored2 extends LinearOpMode {
         mouth1.speak("Color recongnized:"+color);
 
         if (color == 'R') {
-            base1.newTartget(2, 2);
+            base1.newTartget(1.5, 1.5);
             colorArm.setPosition(0);
-            base1.newTartget(-2, -2);
+            base1.newTartget(-1.5, -1.5);
         } else {
-            base1.newTartget(-2, -2);
+            base1.newTartget(-1.5, -1.5);
             colorArm.setPosition(0);
-            base1.newTartget(2, 2);
+            base1.newTartget(1.5, 1.5);
         }
 
         //go to final position

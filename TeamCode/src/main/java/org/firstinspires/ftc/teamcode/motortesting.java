@@ -208,7 +208,6 @@ public class motortesting extends LinearOpMode {
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addLine("relicLift: "+relicLift);
             telemetry.addLine("lf: "+leftFrontMotor.getPower()+"rf: "+rightFrontMotor.getPower());
             telemetry.addLine("lb: "+leftBackMotor.getPower()+"rb: "+rightBackMotor.getPower());
             telemetry.addLine("Grabber: "+clawPosition);
